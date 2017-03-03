@@ -1,0 +1,9 @@
+<h1>Allocate New Cat</h1>
+<form class="form-signin" action="/cats" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<label>Name</label>
+	<br />
+	<input type="text" name="name" class="form-control" placeholder="Nermel" required autofocus>
+	<br />
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Allocate</button>
+</form>

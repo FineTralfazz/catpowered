@@ -1,0 +1,16 @@
+<h1>
+	Cats
+	<small>Total Power Output: <%= @total_power %>kW</small>
+</h1>
+<ul>
+<% @cats.each do |cat| %>
+	<li>
+		<h3>
+			<a href="<%= url_for cat %>"><%= cat.name %></a>
+			<small><%= cat.power_output %>kW</small>
+		</h3>
+	</li>
+<% end %>
+</ul>
+<br />
+<a href="/cats/new" class="btn btn-primary">Allocate New Cat</a>

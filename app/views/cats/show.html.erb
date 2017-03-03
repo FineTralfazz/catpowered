@@ -1,0 +1,19 @@
+<h1>
+	<%= @cat.name %>
+	<small>Status: <%= @cat.status %></small>
+</h1>
+<h3>Power Output</h3>
+<div class="progress">
+	<div class="progress-bar" role="progressbar" style="width: <%= @cat.power_output %>%;">
+		<%= @cat.power_output %>kW
+	</div>
+</div>
+<h3>Live Feed</h3>
+<img src="/video/<%= @cat.color %>/<%= @cat.status %>.gif" />
+<br />
+<br />
+<form action="<%= url_for @cat %>" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<input type="hidden" name="_method" value="delete" />
+	<input type="submit" class="btn btn-danger" value="Send to Farm Upstate" />
+</form>

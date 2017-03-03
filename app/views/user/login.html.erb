@@ -1,0 +1,13 @@
+<h1>Log In</h1>
+<form class="form-signin" action="/user/login" method="post">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+	<label>Username</label>
+	<br />
+	<input type="text" name="name" class="form-control" placeholder="jon.arbuckle" required autofocus>
+	<br />
+	<label>Password</label>
+	<br />
+	<input type="password" name="password" class="form-control" placeholder="he-ate-the-purse" required>
+	<br />
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+</form>

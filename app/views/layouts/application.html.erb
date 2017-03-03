@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CatPowered ⚡🐱⚡</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+	<body>
+		<div class="container">
+			<% if flash[:alert] %>
+				<div class="alert alert-danger">
+					<%= flash[:alert] %>
+				</div>
+			<% end %>
+			<% if flash[:notice] %>
+				<div class="alert alert-info">
+					<%= flash[:notice] %>
+				</div>
+			<% end %>
+			<%= yield %>
+			<br />
+			<br />
+			<footer class="footer">
+				<p>&copy; 2017 CatPowered Incorporated</p>
+				<% if session[:user_id] %>
+					<a href="/user/logout">Log Out</a>
+				<% end %>
+			</footer>
+		</div>
+  </body>
+</html>
