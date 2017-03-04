@@ -1,12 +1,12 @@
 class CatsController < ApplicationController
-  before_action :require_login
+  before_action :require_login, except: :tick
 
   def new
   end
 
   def create
     colors = ['oreo', 'white', 'grey', 'rave', 'cheetah']
-    cat = Cat.create name: params[:name], color: colors.sample, power_output: rand(100), status: 'running'
+    cat = Cat.create name: params[:name], color: colors.sample, power_output: rand(100) + 100, status: 'running'
     redirect_to cat
   end
 
@@ -18,7 +18,9 @@ class CatsController < ApplicationController
     @cats = Cat.all
     @total_power = 0
     @cats.each do |cat|
-      @total_power += cat.power_output
+      if cat.status == 'running'
+        @total_power += cat.power_output
+      end
     end
   end
 
@@ -29,12 +31,27 @@ class CatsController < ApplicationController
 
   def tick
     Cat.all.each do |cat|
-      if rand(5) == 1
+      if cat.status == 'resting'
+        cat.power_output += rand(30)
+        if rand(4) == 0
+          cat.power_output += 50
+          cat.status = 'running'
+        end
+      elsif cat.power_output < 0
         cat.power_output = 0
         cat.status = 'resting'
-        cat.save
+      else
+        cat.power_output -= rand(20) + 10
       end
+      cat.save
     end
+  end
+
+  def rest
+    cat = Cat.find(params[:id])
+    cat.status = 'resting'
+    cat.save
+    redirect_to cat
   end
 
   private
